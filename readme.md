@@ -23,19 +23,24 @@ pip install git+https://github.com/raghuvasanthrao/pandas-mermaid.git
 
 ```python
 import pandas as pd
-import pandas_mermaid.converter as pdm
+from pandas_mermaid.converter import df_to_mermaid
 
-# Create a sample DataFrame
+# Sample DataFrame
 df = pd.DataFrame({
     'Name': ['Node1', 'Node2', 'Node3'],
     'Value': [10, 20, 30],
 })
 
-# Convert DataFrame to Mermaid flowchart (Left-to-Right)
-mermaid_chart = pdm.df_to_mermaid(df, direction="LR") #LR TB
+# Get Mermaid string
+mermaid_code = df_to_mermaid.df_to_mermaid(df, direction="LR")
+print(mermaid_code)
 
-# Print the Mermaid definition
-print(mermaid_chart)
+# Create HTML content
+html_content = df_to_mermaid.to_html(mermaid_code)
+
+# Save HTML file
+with open("diagram.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
 ```
 
 **Output:**
